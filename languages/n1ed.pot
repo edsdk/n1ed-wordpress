@@ -1,0 +1,63 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-22 17:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Alexander Khmelnitskiy <info@alexander.khmelnitskiy.ua\n"
+"Language-Team: N1ED <support@n1ed.com>\n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: n1ed_class.php:80
+msgid "N1ED Settings"
+msgstr ""
+
+#. Name of the plugin
+#. Author of the plugin
+#: n1ed_class.php:80
+msgid "N1ED"
+msgstr ""
+
+#: n1ed_class.php:176
+msgid "API key is requried"
+msgstr ""
+
+#: n1ed.php:86
+msgid ""
+"The whole idea of the singleton design pattern is that there is a single "
+"object therefore, we don't want the object to be cloned."
+msgstr ""
+
+#: n1ed.php:101
+msgid ""
+"The whole idea of the singleton design pattern is that there is a single "
+"object therefore, we don't want the object to be unserialized."
+msgstr ""
+
+#: n1ed.php:223
+msgid "N1ED - structured HTML content editor with CKEditor onboard."
+msgstr ""
+
+#: n1ed.php:224
+msgid "Settings"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"#1 editor for your content. Create and edit in WYSIWYG style responsive "
+"content based on Bootstrap framework."
+msgstr ""
+
+#. URI of the plugin
+msgid "https://n1ed.com/"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://n1ed.com/resources/contacts"
+msgstr ""
