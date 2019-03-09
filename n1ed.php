@@ -2,7 +2,7 @@
 /**
  * Plugin Name: N1ED
  * Plugin URI:  https://n1ed.com
- * Description: # 1 editor for your content. Create and edit in WYSIWYG style responsive content based on Bootstrap framework.
+ * Description: #1 editor for your content. Create and edit in WYSIWYG style responsive content based on Bootstrap framework.
  * Version:     1.1.0
  * Author:      EdSDK
  * Author URI:  https://n1ed.com
