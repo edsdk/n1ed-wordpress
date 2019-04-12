@@ -2,7 +2,7 @@
 /**
  * Plugin Name: N1ED
  * Plugin URI:  https://n1ed.com
- * Description: #1 editor for your content. Create and edit in WYSIWYG style responsive content based on Bootstrap framework
+ * Description: #1 editor for your content. Create and edit in WYSIWYG style responsive content based on Bootstrap framework.
  * Version:     1.1.0
  * Author:      EdSDK
  * Author URI:  https://n1ed.com/resources/contacts
@@ -27,9 +27,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     header( 'HTTP/1.1 403 Forbidden' );
     exit;
 }
-
-/** Set the activation hook for a plugin. We need it to send POST-query on activation. */
-register_activation_hook( __FILE__, array( 'N1EDCore', 'on_activation' ) );
 
 if ( ! class_exists( 'N1EDCore' ) ) :
     
@@ -113,8 +110,6 @@ if ( ! class_exists( 'N1EDCore' ) ) :
          * @access public
          **/
         private function __construct() {
-            /** Send POST after first activation. */
-            $this->first_activation();
             
             /** Load translations. */
             add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
@@ -148,114 +143,6 @@ if ( ! class_exists( 'N1EDCore' ) ) :
 
             /* Init plugin. */
             add_action( 'init', array ( $this, 'n1ed_init' ) );
-        }
-        
-        /**
-         * Activation hook for a plugin. We need it to send POST-query on activation.
-         *
-         * @since 1.0.0
-         * @access public
-         **/
-        public static function on_activation() {
-            /** Security checks. */
-            if ( ! current_user_can( 'activate_plugins' ) ){ return; }
-            $plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
-            check_admin_referer( "activate-plugin_{$plugin}" );
-
-            /** Add option, so that later if we have it we send POST-query. */
-            add_option( 'n1ed_first_time_installed', '1' );
-	}
-        
-        /**
-         * Send POST-query on first time activation.
-         *
-         * @since 1.0.0
-         * @access public
-         **/
-        public function first_activation() {
-            $first_time = get_option( 'n1ed_first_time_installed' );
-            
-            /** If this first time activation. */
-            if ( $first_time == '1') {
-                
-                /** Data to send by POST. */
-                $data = array(
-                    'api_key'           => '8ff60f6330fbe606984d4ee1e39c86e4', 
-                    'event_type'        => 'cmsModuleInstalled',
-                    'event_properties'  => '{cms: "wp"}'
-                );
-                
-                $url = 'https://api.amplitude.com/httpapi';
-                
-                /** Form data string. */
-                $postData = http_build_query( $data, '', '&' );
-                
-                /** Sending POST from cURL. */
-                if ( extension_loaded( 'curl' ) ) {
-                    /** Create a connection. */
-                    $ch = curl_init( $url );
-
-                    /** Setting our options. */
-                    curl_setopt( $ch, CURLOPT_POST, TRUE );
-                    curl_setopt( $ch, CURLOPT_POSTFIELDS, $postData );
-                    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, TRUE );
-
-                    /** Get the response. */
-                    $response = curl_exec($ch);
-                    curl_close($ch);
-                
-                /** Sending POST from PECL. */
-                } elseif ( extension_loaded( 'pecl_http' ) ) {
-                    /** Get the response. */
-                    $response = http_post_data( $url, $postData );
-                
-                /** Sending POST from PECL - OO Approach. */
-                } elseif ( class_exists( 'HTTPRequest' ) ) {
-                    
-                    /** Create the request, state method = HTTP_METH_POST. */
-                    $request = new HTTPRequest( $url, HTTP_METH_POST );
-                    $request->setRawPostData( $postData );
-                    
-                    /** Send our request. */
-                    $request->send();
-                    
-                    /** Get the response. */
-                    $response = $request->getResponseBody();
-                
-                /** Sending POST using HTTP Context. */
-                } elseif ( ini_get('allow_url_fopen') ) {
-                    /** Form our options. */
-                    $opts = array('http' =>
-                        array(
-                            'method'  => 'POST',
-                            'header'  => 'Content-type: application/x-www-form-urlencoded',
-                            'ignore_errors' => true,
-                            'content' => $postData
-                        )
-                    );
-                    
-                    /** Create the context. */
-                    $context = stream_context_create( $opts );
-                    
-                    /** Get the response (you can use this for GET). */
-                    $response = file_get_contents( $url, false, $context );
-                    
-                /** If nothing worked, we will give a chance to WordPress. */
-                } else {
-                    wp_remote_post( $url, array(
-                        'body'          => $data,
-                        'timeout'       => 5,
-                        'redirection'   => 3,
-                        'blocking'      => false,
-                        'httpversion'   => '1.0',
-                        'method'        => 'POST',
-                        'headers'       => array(),
-                        'cookies'       => array()
-                    ) );
-                }
-                                
-                update_option( 'n1ed_first_time_installed', '0' );
-            }
         }
         
         /**

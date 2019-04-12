@@ -30,10 +30,8 @@ if ( ( ! defined( 'ABSPATH' ) ) && ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) ) {
 
 /** Remove site options. */
 delete_option( 'n1ed_key' );
-delete_option( 'n1ed_first_time_installed' );
 delete_option( 'n1ed_dev_prefix' );
 
 /** Remove site options in Multisite. */
 delete_site_option( 'n1ed_key' );
-delete_site_option( 'n1ed_first_time_installed' );
 delete_site_option( 'n1ed_dev_prefix' );
