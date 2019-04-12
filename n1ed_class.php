@@ -5,7 +5,7 @@
  * Description: #1 editor for your content. Create and edit in WYSIWYG style responsive content based on Bootstrap framework
  * Version:     1.1.0
  * Author:      EdSDK
- * Author URI:  https://n1ed.com
+ * Author URI:  https://n1ed.com/resources/contacts
  * License:     GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: n1ed

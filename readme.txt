@@ -1,6 +1,6 @@
 === N1ED ===
-Contributors: edsdk
-Tags: editor, content, wysiwyg, page builder, content builder, bootstrap 4, responsive, mobile
+Contributors: EdSDK
+Tags: editor, content, wysiwyg, page builder, content builder, bootstrap, responsive, mobile
 Requires at least: 4.8
 Tested up to: 5.0
 Requires PHP: 5.3
