@@ -253,9 +253,17 @@ if ( ! class_exists( 'n1ed_class' ) ) :
             if (!is_dir(ABSPATH . 'wp-content/uploads/n1ed')) {
                 mkdir(ABSPATH . 'wp-content/uploads/n1ed');
             }
+            
+            if (!is_dir(ABSPATH . 'wp-content/uploads/n1ed/uploads')) {
+                mkdir(ABSPATH . 'wp-content/uploads/n1ed/uploads');
+            }
 
             if (!is_dir(ABSPATH . 'wp-content/uploads/n1ed_tmp')) {
                 mkdir(ABSPATH . 'wp-content/uploads/n1ed_tmp');
+            }
+            
+            if (!is_dir(ABSPATH . 'wp-content/uploads/n1ed_cache')) {
+                mkdir(ABSPATH . 'wp-content/uploads/n1ed_cache');
             }
         }
 
