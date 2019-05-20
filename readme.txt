@@ -35,6 +35,19 @@ For basic usage, you can also have a look at the [plugin web site](https://n1ed.
 
 == Changelog ==
 
+= 1.2.0 =
+
+* New UI
+* Full compatibility with CKEditor API
+* Downloadable edition for your server
+* New widgets system
+* File Manager
+* New Bootstrap Editor
+* Preview of responsive content
+* Greatly improved work with image galleries
+* Content mode
+* Widget based breadcrumbs
+
 = 1.1.0 =
 
 * Initial release
