@@ -3,7 +3,7 @@
  * Plugin Name: N1ED
  * Plugin URI:  https://n1ed.com
  * Description: #1 editor for your content. Create and edit in WYSIWYG style responsive content based on Bootstrap framework.
- * Version:     1.2.0
+ * Version:     1.3.0
  * Author:      EdSDK
  * Author URI:  https://n1ed.com/resources/contacts
  * License:     GPL2
@@ -15,7 +15,7 @@
 /**
  * N1ED — #1 editor for your content. Create and edit in WYSIWYG style responsive content based on Bootstrap framework.
  * @encoding     UTF-8
- * @version      1.2.0
+ * @version      1.3.0
  * @license      GPLv2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @copyright    Copyright (c) 2019 EdSDK (https://n1ed.com/). All rights reserved.
  * @support      support@n1ed.zendesk.com
@@ -46,7 +46,7 @@ if ( ! class_exists( 'N1EDCore' ) ) :
          * @var Constant
          * @since 1.0.0
          **/
-        const VERSION = '1.0.0';
+        const VERSION = '1.3.0';
         
         /**
          * The one true N1EDCore.
@@ -83,7 +83,7 @@ if ( ! class_exists( 'N1EDCore' ) ) :
 	 * @access protected
 	 * @return void
 	 **/
-	public function __clone() {
+	public function n1ed_clone() {
             /** Cloning instances of the class is forbidden. */
             _doing_it_wrong( __FUNCTION__, __( 'The whole idea of the singleton design pattern is that there is a single object therefore, we don\'t want the object to be cloned.', 'n1ed' ), self::VERSION );
 	}
@@ -98,7 +98,7 @@ if ( ! class_exists( 'N1EDCore' ) ) :
 	 * @access protected
 	 * @return void
 	 **/
-	public function __wakeup() {
+	public function n1ed_wakeup() {
             /** Unserializing instances of the class is forbidden. */
             _doing_it_wrong( __FUNCTION__, __( 'The whole idea of the singleton design pattern is that there is a single object therefore, we don\'t want the object to be unserialized.', 'n1ed' ), self::VERSION );
 	}

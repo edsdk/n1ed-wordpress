@@ -2,7 +2,7 @@
 /**
  * N1ED — #1 editor for your content. Create and edit in WYSIWYG style responsive content based on Bootstrap framework.
  * @encoding     UTF-8
- * @version      1.2.0
+ * @version      1.3.0
  * @license      GPLv2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @copyright    Copyright (c) 2019 EdSDK (https://n1ed.com/). All rights reserved.
  * @support      support@n1ed.zendesk.com
@@ -250,20 +250,20 @@ if ( ! class_exists( 'n1ed_class' ) ) :
         // Prepare directories
         public static function prepare_directories() {
 
-            if (!is_dir(ABSPATH . 'wp-content/uploads/n1ed')) {
-                mkdir(ABSPATH . 'wp-content/uploads/n1ed');
+            if (!is_dir(WP_CONTENT_DIR . '/uploads/n1ed')) {
+                mkdir(WP_CONTENT_DIR . '/uploads/n1ed');
             }
             
-            if (!is_dir(ABSPATH . 'wp-content/uploads/n1ed/uploads')) {
-                mkdir(ABSPATH . 'wp-content/uploads/n1ed/uploads');
+            if (!is_dir(WP_CONTENT_DIR . '/uploads/n1ed/uploads')) {
+                mkdir(WP_CONTENT_DIR . '/uploads/n1ed/uploads');
             }
 
-            if (!is_dir(ABSPATH . 'wp-content/uploads/n1ed_tmp')) {
-                mkdir(ABSPATH . 'wp-content/uploads/n1ed_tmp');
+            if (!is_dir(WP_CONTENT_DIR . '/uploads/n1ed_tmp')) {
+                mkdir(WP_CONTENT_DIR . '/uploads/n1ed_tmp');
             }
             
-            if (!is_dir(ABSPATH . 'wp-content/uploads/n1ed_cache')) {
-                mkdir(ABSPATH . 'wp-content/uploads/n1ed_cache');
+            if (!is_dir(WP_CONTENT_DIR . '/uploads/n1ed_cache')) {
+                mkdir(WP_CONTENT_DIR . '/uploads/n1ed_cache');
             }
         }
 
