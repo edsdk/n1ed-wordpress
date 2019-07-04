@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  **/
-final class N1EDCore {
+final class Core {
 
     /** 
      * Plugin version.
@@ -64,8 +64,8 @@ private static $instance;
      * @since 1.0.0
      **/
     public static function get_instance() {
-        if ( ! isset( self::$instance ) && ! ( self::$instance instanceof N1EDCore ) ) {
-            self::$instance = new N1EDCore;
+        if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Core ) ) {
+            self::$instance = new Core;
         }
 
         return self::$instance;
@@ -176,12 +176,12 @@ public function __wakeup() {
         array_unshift( $links, '<a title="' . esc_attr__( 'Settings', 'n1ed' ) . '" href="'. admin_url( 'options-general.php?page=n1ed_settings' ) .'">' . esc_attr__( 'Settings', 'n1ed' ) . '</a>');
         return $links;
     }
-} // End Class N1EDCore.
+} // End Class Core.
 
 /**
- * Instantiates the N1EDCore class.
- * N1EDCore is a singleton so we can directly access the one true N1EDCore object using this variable.
+ * Instantiates the Core class.
+ * N1EDCore is a singleton so we can directly access the one true Core object using this variable.
  *
- * @return object N1EDCore
+ * @return object Core
  **/
-$N1EDCore = N1EDCore::get_instance();
+$Core = Core::get_instance();

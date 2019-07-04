@@ -10,12 +10,17 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+define( 'WP_USE_THEMES', false );
+require( '../../../../wp-load.php' );
+
+$upload_dir = wp_get_upload_dir();
+
 use EdSDK\FlmngrServer\FlmngrServer;
 
 FlmngrServer::flmngrRequest(
     array(
-        'dirFiles' => './../../../../wp-content/uploads/n1ed',
-        'dirTmp'   => './../../../../wp-content/uploads/n1ed_tmp',
-        'dirCache' => './../../../../wp-content/uploads/n1ed_cache'
+        'dirFiles' => $upload_dir['basedir'] . '/n1ed',
+        'dirTmp'   => $upload_dir['basedir'] . '/n1ed_tmp',
+        'dirCache' => $upload_dir['basedir'] . '/n1ed_cache'
     )
 );
