@@ -3,7 +3,7 @@
 namespace EdSDK\FileUploaderServer\servlet;
 
 use EdSDK\FileUploaderServer\lib\file\UtilsPHP;
-use EdSDK\FileUploaderServer\lib\action\req\ReqError;
+use EdSDK\FileUploaderServer\lib\action\req\Req;
 use EdSDK\FileUploaderServer\lib\action\resp\Message;
 use EdSDK\FileUploaderServer\lib\action\resp\RespFail;
 use EdSDK\FileUploaderServer\lib\Actions;
@@ -36,7 +36,7 @@ class UploaderServlet {
     protected function getReq($post, $files) {
         $req = null;
         try {
-            $req = $this->m_json->fromJson($post['data']);
+            $req = $this->m_json->fromJson(stripslashes($post['data']));
             if ($this->m_config->isTestAllowed()) {
                 if (array_key_exists("test_serverConfig", $req))
                     $this->m_config->setTestConfig($req->test_serverConfig);
@@ -89,7 +89,7 @@ class UploaderServlet {
             }
 
             if ($req === null)
-                $req = new ReqError(Message::createMessage(Message::MALFORMED_REQUEST));
+                $req = new Req(Message::createMessage(Message::MALFORMED_REQUEST));
 
             $resp = $this->m_uploader->run($req);
             if ($resp === null)
