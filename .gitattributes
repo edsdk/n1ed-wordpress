@@ -1,0 +1,4 @@
+zip.sh export-ignore
+n1ed.zip export-ignore
+.gitignore export-ignore
+.project export-ignore
