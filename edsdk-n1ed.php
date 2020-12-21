@@ -31,6 +31,32 @@ class N1ED
     {
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_filter('plugin_action_links', [$this, 'add_settings_link'], 10, 2);
+
+        add_action('rest_api_init', function () {
+            register_rest_route('edsdk-n1ed/v1', '/flmngr', [
+                'methods' => 'POST',
+                'callback' => [$this, 'flmngrProcess'],
+            ]);
+        });
+
+        add_action('rest_api_init', function () {
+            register_rest_route('edsdk-n1ed/v1', '/saveApi', [
+                'methods' => 'POST',
+                'callback' => [$this, 'saveApi'],
+            ]);
+        });
+    }
+
+    public function flmngrProcess(WP_REST_Request $request)
+    {
+        // is_admin();
+    }
+
+    public function saveApi(WP_REST_Request $request)
+    {
+        update_option('n1edApiKey', $_REQUEST['n1edApiKey']);
+        update_option('n1edToken', $_REQUEST['n1edToken']);
+        return true;
     }
 
     public function add_settings_page()
