@@ -27,15 +27,32 @@ File Manager • Image Editor • and other features
  */
 class N1ED
 {
+    private $plugin_url;
+
     public function __construct()
     {
+        add_filter('use_block_editor_for_post_type', '__return_false', 1000);
+        $this->plugin_url = plugins_url('', __FILE__);
+        add_filter('tiny_mce_plugins', [$this, 'tiny_mce_plugins'], 999);
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_filter('plugin_action_links', [$this, 'add_settings_link'], 10, 2);
+
+        // add_action('wp_enqueue_scripts', [$this, 'edsdk_enqueue_editor']);
+
+        add_action(
+            'admin_enqueue_scripts',
+            [$this, 'edsdk_enqueue_editor'],
+            10,
+            1
+        );
 
         add_action('rest_api_init', function () {
             register_rest_route('edsdk-n1ed/v1', '/flmngr', [
                 'methods' => 'POST',
                 'callback' => [$this, 'flmngrProcess'],
+                'permission_callback' => function () {
+                    return is_admin();
+                },
             ]);
         });
 
@@ -43,8 +60,50 @@ class N1ED
             register_rest_route('edsdk-n1ed/v1', '/saveApi', [
                 'methods' => 'POST',
                 'callback' => [$this, 'saveApi'],
+                'permission_callback' => function () {
+                    return is_admin();
+                },
             ]);
         });
+
+        // add_action('admin_print_footer_scripts', [$this, 'remove_tinymce']);
+    }
+
+    public function tiny_mce_plugins()
+    {
+        return [];
+    }
+
+    public function edsdk_enqueue_editor($hook)
+    {
+        global $post;
+
+        if ($hook == 'post-new.php' || $hook == 'post.php') {
+            if (has_action('admin_print_footer_scripts', 'wp_tiny_mce')) {
+                // remove_action('admin_print_footer_scripts', 'wp_tiny_mce', 25);
+            }
+            wp_enqueue_script(
+                'n1ed',
+                $this->plugin_url . '/js/n1edLoader.js',
+                [],
+                false,
+                true
+            );
+        }
+    }
+
+    public function remove_tinymce()
+    {
+        // if (has_action('admin_print_footer_scripts', 'wp_tiny_mce')) {
+        //     remove_action('admin_print_footer_scripts', 'wp_tiny_mce', 25);
+        // }
+        // $this->enqueue_n1ed_js();
+    }
+
+    // add_action('wp_enqueue_scripts', [$this, 'enqueue_n1ed_js']);
+
+    public function enqueue_editor()
+    {
     }
 
     public function flmngrProcess(WP_REST_Request $request)
