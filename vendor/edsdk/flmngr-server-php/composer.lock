@@ -1,0 +1,68 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "5dbd16b814ecc5055c75abf603f67aae",
+    "packages": [
+        {
+            "name": "edsdk/file-uploader-server-php",
+            "version": "1.0.30",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edsdk/file-uploader-server-php.git",
+                "reference": "fa47da21ba59f85a56e1e4ac2b21852789f1af91"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edsdk/file-uploader-server-php/zipball/fa47da21ba59f85a56e1e4ac2b21852789f1af91",
+                "reference": "fa47da21ba59f85a56e1e4ac2b21852789f1af91",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EdSDK\\FileUploaderServer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "EdSDK",
+                    "email": "edsdk@edsdk.com"
+                }
+            ],
+            "description": "PHP uploader for EdSDK products",
+            "homepage": "https://imgpen.com",
+            "keywords": [
+                "file",
+                "image",
+                "imgpen",
+                "server",
+                "upload"
+            ],
+            "support": {
+                "issues": "https://github.com/edsdk/file-uploader-server-php/issues",
+                "source": "https://github.com/edsdk/file-uploader-server-php/tree/1.0.30"
+            },
+            "time": "2020-12-03T11:10:30+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "ext-gd": "*",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
+}

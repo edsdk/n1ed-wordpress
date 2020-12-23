@@ -1,0 +1,109 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "4b154bf2dc0bead69dba53a028b1e0e8",
+    "packages": [
+        {
+            "name": "edsdk/file-uploader-server-php",
+            "version": "1.0.31",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edsdk/file-uploader-server-php.git",
+                "reference": "ff9c41ed1ef92622e71182fe5f080c9918d2d38e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edsdk/file-uploader-server-php/zipball/ff9c41ed1ef92622e71182fe5f080c9918d2d38e",
+                "reference": "ff9c41ed1ef92622e71182fe5f080c9918d2d38e",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EdSDK\\FileUploaderServer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "EdSDK",
+                    "email": "edsdk@edsdk.com"
+                }
+            ],
+            "description": "PHP uploader for EdSDK products",
+            "homepage": "https://imgpen.com",
+            "keywords": [
+                "file",
+                "image",
+                "imgpen",
+                "server",
+                "upload"
+            ],
+            "time": "2020-12-07T11:16:08+00:00"
+        },
+        {
+            "name": "edsdk/flmngr-server-php",
+            "version": "1.0.35",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edsdk/flmngr-server-php.git",
+                "reference": "d288e3261e11ba69347e054f885482ad774dc733"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edsdk/flmngr-server-php/zipball/d288e3261e11ba69347e054f885482ad774dc733",
+                "reference": "d288e3261e11ba69347e054f885482ad774dc733",
+                "shasum": ""
+            },
+            "require": {
+                "edsdk/file-uploader-server-php": "^1.0.31",
+                "ext-curl": "*",
+                "ext-gd": "*",
+                "ext-json": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EdSDK\\FlmngrServer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "EdSDK",
+                    "email": "edsdk@edsdk.com"
+                }
+            ],
+            "description": "Flmngr file manager PHP backend",
+            "homepage": "https://flmngr.com",
+            "keywords": [
+                "file",
+                "finder",
+                "image",
+                "imgpen",
+                "manager",
+                "server",
+                "upload"
+            ],
+            "time": "2020-12-07T11:17:51+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}

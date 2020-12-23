@@ -69,13 +69,14 @@ function includeJS(urlJS, doc, callback) {
 //       "cut copy | undo redo | searchreplace | bold italic strikethrough | forecolor backcolor | blockquote | removeformat | Info",
 //       "Flmngr ImgPen | formatselect | link | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent | magentowidget magentovariable",
 //     ],
-
+document.querySelector(".wp-editor-tabs").style.display = "none";
+const { apiKey, token } = n1ed_ajax_object;
 function deleteInclude() {
   let id = tinymce.editors[0].id;
   tinymce.get(id).remove();
   delete window.tinymce;
 
-  includeJS("https://cloud.n1ed.com/cdn/N1EDDFLT/n1tinymce.js");
+  includeJS(`https://cloud.n1ed.com/cdn/${apiKey}/n1tinymce.js`);
   waitForEditor(false, id);
 }
 
@@ -83,8 +84,11 @@ function setupNow(editor_id) {
   //   tinymce.editors = [];
   tinymce.init({
     selector: "#" + editor_id,
+    urlFileManager: "/wp-json/edsdk-n1ed/v1/flmngr",
+    urlFiles: "http://localhost/wp-content/uploads",
+    apiKey,
+    token,
   });
-  document.querySelector(".wp-editor-tabs").style.display = "none";
 }
 
 function waitForEditor(di = false, editor_id = "") {
@@ -100,5 +104,5 @@ function waitForEditor(di = false, editor_id = "") {
     }, 100);
   }
 }
-
+// console.log(n1ed_ajax_object);
 waitForEditor(true, "");
