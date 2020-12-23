@@ -82,14 +82,17 @@ class N1ED
             ]);
         });
 
-        add_action('init', [$this, 'cookies_set']);
+        add_action('init', [$this, 'cookies_set'], 0);
 
         // add_action('admin_print_footer_scripts', [$this, 'remove_tinymce']);
     }
 
     public function cookies_set()
     {
-        wp_set_auth_cookie(get_current_user_id());
+        // wp_set_current_user(1, 'admin');
+        // wp_clear_auth_cookie();
+        // wp_set_auth_cookie(1);
+        // wp_set_auth_cookie(1, true);
     }
 
     public function tiny_mce_plugins()
@@ -119,9 +122,9 @@ class N1ED
                 update_option('n1edApiKey', $apiKey);
             }
             wp_localize_script('n1ed', 'n1ed_ajax_object', [
-                'security' => wp_create_nonce('acme-security-nonce'),
                 'apiKey' => $apiKey,
                 'token' => get_option('n1edToken'),
+                'urlFiles' => wp_upload_dir()['baseurl'],
             ]);
         }
     }

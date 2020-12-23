@@ -70,7 +70,10 @@ function includeJS(urlJS, doc, callback) {
 //       "Flmngr ImgPen | formatselect | link | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent | magentowidget magentovariable",
 //     ],
 document.querySelector(".wp-editor-tabs").style.display = "none";
-const { apiKey, token } = n1ed_ajax_object;
+document.querySelector("#wp-content-media-buttons").style.display = "none";
+
+const { apiKey, token, urlFiles } = n1ed_ajax_object;
+console.log(urlFiles);
 function deleteInclude() {
   let id = tinymce.editors[0].id;
   tinymce.get(id).remove();
@@ -85,7 +88,7 @@ function setupNow(editor_id) {
   tinymce.init({
     selector: "#" + editor_id,
     urlFileManager: "/wp-json/edsdk-n1ed/v1/flmngr",
-    urlFiles: "http://localhost/wp-content/uploads",
+    urlFiles,
     apiKey,
     token,
   });
