@@ -132,7 +132,9 @@ class N1ED
         $files = wp_upload_dir()['basedir'];
         $tmp = get_temp_dir();
         $cache = plugin_dir_path(__FILE__) . '/flmngr-cache/';
-
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data'])) {
+            $_POST['data'] = stripslashes($_POST['data']);
+        }
         FlmngrServer::flmngrRequest([
             'dirFiles' => $files,
             'dirTmp' => $tmp,
