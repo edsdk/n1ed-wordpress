@@ -31,19 +31,15 @@ require __DIR__ . '/vendor/autoload.php';
 use EdSDK\FlmngrServer\FlmngrServer;
 class N1ED
 {
-    // ["baseurl"]=> string(35) "http://localhost/wp-content/uploads"
     private $plugin_url;
 
     public function __construct()
     {
-        // die(var_dump(get_current_user_id()));
         add_filter('use_block_editor_for_post_type', '__return_false', 1000);
         $this->plugin_url = plugins_url('', __FILE__);
         add_filter('tiny_mce_plugins', [$this, 'tiny_mce_plugins'], 999);
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_filter('plugin_action_links', [$this, 'add_settings_link'], 10, 2);
-
-        // add_action('wp_enqueue_scripts', [$this, 'edsdk_enqueue_editor']);
 
         add_action(
             'admin_enqueue_scripts',
@@ -54,7 +50,7 @@ class N1ED
 
         add_action('rest_api_init', function () {
             register_rest_route('edsdk-n1ed/v1', '/flmngr', [
-                'methods' => 'POST',
+                'methods' => 'POST, GET',
                 'callback' => [$this, 'flmngrProcess'],
                 'permission_callback' => function () {
                     return wp_validate_auth_cookie('', 'logged_in');
@@ -82,17 +78,7 @@ class N1ED
             ]);
         });
 
-        add_action('init', [$this, 'cookies_set'], 0);
-
-        // add_action('admin_print_footer_scripts', [$this, 'remove_tinymce']);
-    }
-
-    public function cookies_set()
-    {
-        // wp_set_current_user(1, 'admin');
-        // wp_clear_auth_cookie();
-        // wp_set_auth_cookie(1);
-        // wp_set_auth_cookie(1, true);
+        // add_action('init', [$this, 'cookies_set'], 0);
     }
 
     public function tiny_mce_plugins()
@@ -105,9 +91,6 @@ class N1ED
         global $post;
 
         if ($hook == 'post-new.php' || $hook == 'post.php') {
-            if (has_action('admin_print_footer_scripts', 'wp_tiny_mce')) {
-                // remove_action('admin_print_footer_scripts', 'wp_tiny_mce', 25);
-            }
             wp_enqueue_script(
                 'n1ed',
                 $this->plugin_url . '/js/n1edLoader.js',
@@ -129,39 +112,17 @@ class N1ED
         }
     }
 
-    public function remove_tinymce()
-    {
-        // if (has_action('admin_print_footer_scripts', 'wp_tiny_mce')) {
-        //     remove_action('admin_print_footer_scripts', 'wp_tiny_mce', 25);
-        // }
-        // $this->enqueue_n1ed_js();
-    }
-
-    // add_action('wp_enqueue_scripts', [$this, 'enqueue_n1ed_js']);
-
-    public function enqueue_editor()
-    {
-    }
-
-    // private function createDirIfNotExist(string $path): void
-    // {
-    //     if (!file_exists($path)) {
-    //         mkdir($path, 0777, true);
-    //     }
-    // }
-
     public function flmngrProcess(WP_REST_Request $request)
     {
         $files = wp_upload_dir()['basedir'];
         $tmp = get_temp_dir();
         $cache = plugin_dir_path(__FILE__) . '/flmngr-cache/';
-        // die(var_dump($_POST));
+
         FlmngrServer::flmngrRequest([
             'dirFiles' => $files,
             'dirTmp' => $tmp,
             'dirCache' => $cache,
         ]);
-        // is_admin();
     }
 
     public function saveApi(WP_REST_Request $request)

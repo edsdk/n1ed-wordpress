@@ -45,35 +45,10 @@ function includeJS(urlJS, doc, callback) {
   }
 }
 
-// settings = {
-//     selector: "#" + this.getId(),
-//     urlFileManager: flmngrURL,
-//     urlFiles: "/pub/media/wysiwyg/",
-//     relative_urls: false,
-//     apiKey: this.config.apiKey,
-//     token: this.config.token,
-//     varienGlobalEvents,
-//     configDirectiveGenerator,
-//     customDirectiveGenerator,
-//     bootstrap4: {
-//       includeToGlobalDoc: false,
-//     },
-//     wysiwyg: this,
-//     mwOpts: this.config.plugins[mwi].options,
-//     mvOpts: this.config.plugins[mvi].options,
-//     external_plugins: {
-//       magentowidget: "/extras/plugins/magentowidgets",
-//       magentovariable: "/extras/plugins/magentovariables",
-//     },
-//     toolbar: [
-//       "cut copy | undo redo | searchreplace | bold italic strikethrough | forecolor backcolor | blockquote | removeformat | Info",
-//       "Flmngr ImgPen | formatselect | link | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent | magentowidget magentovariable",
-//     ],
 document.querySelector(".wp-editor-tabs").style.display = "none";
 document.querySelector("#wp-content-media-buttons").style.display = "none";
 
 const { apiKey, token, urlFiles } = n1ed_ajax_object;
-console.log(urlFiles);
 function deleteInclude() {
   let id = tinymce.editors[0].id;
   tinymce.get(id).remove();
@@ -84,13 +59,13 @@ function deleteInclude() {
 }
 
 function setupNow(editor_id) {
-  //   tinymce.editors = [];
   tinymce.init({
     selector: "#" + editor_id,
     urlFileManager: "/wp-json/edsdk-n1ed/v1/flmngr",
     urlFiles,
     apiKey,
     token,
+    relative_urls: false,
   });
 }
 
@@ -107,5 +82,5 @@ function waitForEditor(di = false, editor_id = "") {
     }, 100);
   }
 }
-// console.log(n1ed_ajax_object);
+
 waitForEditor(true, "");
