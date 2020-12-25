@@ -16,7 +16,6 @@ if (!$apiKey) {
 
 <div id="cms-conf-placeholder"></div>
 <div class="n1ed-buttons">
-  <button id='n1edLogout' type="button" class="n1ed-button n1ed-button--primary"><span>Logout</span></button>
   <button id='n1edSave' type="button" class="n1ed-button n1ed-button--primary"><span>Save</span></button>
 </div>
 <script src='https://n1ed.com/js/n1ed-cms-conf-3.js'></script>
@@ -45,13 +44,6 @@ document.getElementById('n1edSave').addEventListener('click',() => {
   });
 });
 
-document.getElementById('n1edLogout').addEventListener('click',() => {
-  fetch('/wp-json/edsdk-n1ed/v1/logout')
-  .then(response => {
-    window.location.reload();
-  });
-
-});
 </script>
 
 
