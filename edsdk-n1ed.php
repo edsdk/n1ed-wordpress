@@ -59,27 +59,7 @@ class N1ED
         });
 
         add_action('rest_api_init', function () {
-            register_rest_route('edsdk-n1ed/v1', '/get', [
-                'methods' => 'GET',
-                'callback' => [$this, 'getApi'],
-                'permission_callback' => function () {
-                    return wp_validate_auth_cookie('', 'logged_in');
-                },
-            ]);
-        });
-
-        add_action('rest_api_init', function () {
-            register_rest_route('edsdk-n1ed/v1', '/logout', [
-                'methods' => 'GET',
-                'callback' => [$this, 'logout'],
-                'permission_callback' => function () {
-                    return wp_validate_auth_cookie('', 'logged_in');
-                },
-            ]);
-        });
-
-        add_action('rest_api_init', function () {
-            register_rest_route('edsdk-n1ed/v1', '/saveApi', [
+            register_rest_route('edsdk-n1ed/v1', '/setApiKey', [
                 'methods' => 'POST',
                 'callback' => [$this, 'saveApi'],
                 'permission_callback' => function () {

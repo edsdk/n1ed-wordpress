@@ -48,13 +48,15 @@ function includeJS(urlJS, doc, callback) {
 document.querySelector(".wp-editor-tabs").style.display = "none";
 document.querySelector("#wp-content-media-buttons").style.display = "none";
 
-const { apiKey, token, urlFiles } = n1ed_ajax_object;
+var apiKey = n1ed_ajax_object.apiKey;
+var token = n1ed_ajax_object.token;
+var urlFiles = n1ed_ajax_object.urlFiles;
 function deleteInclude() {
-  let id = tinymce.editors[0].id;
+  var id = tinymce.editors[0].id;
   tinymce.get(id).remove();
   delete window.tinymce;
 
-  includeJS(`https://cloud.n1ed.com/cdn/${apiKey}/n1tinymce.js`);
+  includeJS("https://cloud.n1ed.com/cdn/" + apiKey + "/n1tinymce.js");
   waitForEditor(false, id);
 }
 
@@ -62,14 +64,14 @@ function setupNow(editor_id) {
   tinymce.init({
     selector: "#" + editor_id,
     urlFileManager: "/wp-json/edsdk-n1ed/v1/flmngr",
-    urlFiles,
-    apiKey,
-    token,
+    urlFiles: urlFiles,
+    apiKey: apiKey,
+    token: token,
     relative_urls: false,
   });
 }
 
-function waitForEditor(di = false, editor_id = "") {
+function waitForEditor(di, editor_id) {
   if (window.tinymce) {
     if (di) {
       deleteInclude();

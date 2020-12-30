@@ -22,7 +22,7 @@ if (!$apiKey) {
 <script>
 var saveFunc = window.attachN1EDCmsConf({
         el: document.getElementById("cms-conf-placeholder"),
-        urlSetApiKeyAndToken:  '/wp-json/edsdk-n1ed/v1/saveApi',
+        urlSetApiKeyAndToken:  '/wp-json/edsdk-n1ed/v1/setApiKey',
         apiKey: '<?php echo $apiKey; ?>',
         token: '<?php echo $token; ?>',
         editorName: 'tinymce', // or 'ckeditor' if you use it as base editor
