@@ -37,7 +37,7 @@ class N1ED
     {
         add_filter('use_block_editor_for_post_type', '__return_false', 1000);
         $this->plugin_url = plugins_url('', __FILE__);
-        add_filter('tiny_mce_plugins', [$this, 'tiny_mce_plugins'], 999);
+        // add_filter('tiny_mce_plugins', [$this, 'tiny_mce_plugins'], 999);
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_filter('plugin_action_links', [$this, 'add_settings_link'], 10, 2);
 
@@ -52,9 +52,11 @@ class N1ED
             register_rest_route('edsdk-n1ed/v1', '/flmngr', [
                 'methods' => 'POST, GET',
                 'callback' => [$this, 'flmngrProcess'],
-                'permission_callback' => function () {
-                    return wp_validate_auth_cookie('', 'logged_in');
-                },
+                // 'permission_callback' => function () {
+                //     // return wp_validate_auth_cookie('', 'logged_in');
+                //     return true;
+                // },
+                'permission_callback' => '__return_true',
             ]);
         });
 
@@ -99,10 +101,13 @@ class N1ED
                 $apiKey = 'N1EDDFLT';
                 update_option('n1edApiKey', $apiKey);
             }
+            $defaultUploadDir = '/uploads/2021/02';
+
             wp_localize_script('n1ed', 'n1ed_ajax_object', [
                 'apiKey' => $apiKey,
                 'token' => get_option('n1edToken'),
                 'urlFiles' => wp_upload_dir()['baseurl'],
+                'defaultUploadDir' => $defaultUploadDir,
             ]);
         }
     }
@@ -165,14 +170,32 @@ class N1ED
 
     public function add_settings_link($links, $file)
     {
-        $settings_link = sprintf(
-            '<a href="%s">%s</a>',
-            admin_url('options-general.php?page=edsdk-n1ed'),
-            __('Settings', 'edsdk-n1ed')
-        );
-        $links = (array) $links;
-        $links['tma_settings_link'] = $settings_link;
+        if (
+            $file === 'n1ed/edsdk-n1ed.php' &&
+            current_user_can('manage_options')
+        ) {
+            if (current_filter() === 'plugin_action_links') {
+                $url = admin_url('options-general.php?page=edsdk-n1ed');
+            } else {
+                // $url = admin_url( '/network/settings.php#classic-editor-options' );
+            }
 
+            // Prevent warnings in PHP 7.0+ when a plugin uses this filter incorrectly.
+            $links = (array) $links;
+            $links[] = sprintf(
+                '<a href="%s">%s</a>',
+                $url,
+                __('Settings', 'edsdk-n1ed')
+            );
+
+            // $settings_link = sprintf(
+            //     '<a href="%s">%s</a>',
+            //     admin_url('options-general.php?page=edsdk-n1ed'),
+            //     __('Settings', 'edsdk-n1ed')
+            // );
+            // $links = (array) $links;
+            // $links['tma_settings_link'] = $settings_link;
+        }
         return $links;
     }
 }
