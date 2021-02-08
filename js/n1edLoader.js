@@ -72,7 +72,7 @@ function setupNow(editor_id) {
     selector: "#" + editor_id,
     urlFileManager: "/wp-json/edsdk-n1ed/v1/flmngr",
     urlFiles: urlFiles,
-    intergration: "wordpress",
+    integration: "wordpress",
     apiKey: apiKey,
     token: token,
     relative_urls: false,
