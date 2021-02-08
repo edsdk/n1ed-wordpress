@@ -73,7 +73,7 @@ class N1ED
 
     public function logout(WP_REST_Request $request)
     {
-        update_option('n1edApiKey', 'N1EDDFLT');
+        update_option('n1edApiKey', 'N1WPDFLT');
         update_option('n1edToken', '');
         return true;
     }
@@ -98,7 +98,7 @@ class N1ED
 
             $apiKey = get_option('n1edApiKey');
             if (!$apiKey) {
-                $apiKey = 'N1EDDFLT';
+                $apiKey = 'N1WPDFLT';
                 update_option('n1edApiKey', $apiKey);
             }
             $defaultUploadDir = '/uploads/2021/02';
@@ -138,7 +138,7 @@ class N1ED
     {
         $apiKey = get_option('n1edApiKey');
         if (!$apiKey) {
-            $apiKey = 'N1EDDFLT';
+            $apiKey = 'N1WPDFLT';
             update_option('n1edApiKey', $apiKey);
         }
 

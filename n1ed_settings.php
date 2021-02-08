@@ -8,8 +8,8 @@ $apiKey = get_option('n1edApiKey');
 $token = get_option('n1edToken');
 
 if (!$apiKey) {
-    add_option('n1edApiKey', 'N1EDDFLT');
-    $apiKey = 'N1EDDFLT';
+    add_option('n1edApiKey', 'N1WPDFLT');
+    $apiKey = 'N1WPDFLT';
 }
 ?>
 
