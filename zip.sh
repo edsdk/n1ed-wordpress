@@ -1,3 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-git archive HEAD --prefix=n1ed/ --format=zip -o dist/n1ed-wordpress.zip
+if ! command -v zip &> /dev/null
+then
+    echo "Zip could not be found"
+    exit
+fi
+rm zip/n1ed-wordpress.zip
+zip -r zip/n1ed-wordpress.zip . -i './flmngr-cache/.gitignore' '*.php' './js/*' './tmp/' './vendor/*'
