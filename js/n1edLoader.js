@@ -45,27 +45,12 @@ function includeJS(urlJS, doc, callback) {
   }
 }
 
-document.querySelector(".wp-editor-tabs").style.display = "none";
-document.querySelector("#wp-content-media-buttons").style.display = "none";
+// document.querySelector(".wp-editor-tabs").style.display = "none";
+// document.querySelector("#wp-content-media-buttons").style.display = "none";
 
 var apiKey = n1ed_ajax_object.apiKey;
 var token = n1ed_ajax_object.token;
 var urlFiles = n1ed_ajax_object.urlFiles;
-// var defaultUploadDir = n1ed_ajax_object.defaultUploadDir;
-var defaultUploadDir = "/uploads/2021/02";
-
-function deleteInclude() {
-  var id = tinymce.editors[0].id;
-  tinymce.get(id).remove();
-  delete window.tinymce;
-  includeJS(
-    "https://cloud.n1ed.com/cdn/" + apiKey + "/n1tinymce.js",
-    document,
-    function () {
-      waitForEditor(false, id);
-    }
-  );
-}
 
 function setupNow(editor_id) {
   tinymce.init({
@@ -93,4 +78,10 @@ function waitForEditor(di, editor_id) {
   }
 }
 
-waitForEditor(true, "");
+includeJS(
+  "https://cloud.n1ed.com/cdn/" + apiKey + "/n1tinymce.js",
+  document,
+  function () {
+    waitForEditor(false, "content");
+  }
+);

@@ -39,7 +39,12 @@ class N1ED
         $this->plugin_url = plugins_url('', __FILE__);
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_filter('plugin_action_links', [$this, 'add_settings_link'], 10, 2);
-
+        add_filter(
+            'wp_editor_settings',
+            [$this, 'n1ed_replace_tinymce'],
+            10,
+            2
+        );
         add_action(
             'admin_enqueue_scripts',
             [$this, 'edsdk_enqueue_editor'],
@@ -81,6 +86,21 @@ class N1ED
         return [];
     }
 
+    public function n1ed_replace_tinymce($settings, $editor_id)
+    {
+        if (
+            $editor_id === 'content' &&
+            (get_current_screen()->post_type === 'post' ||
+                get_current_screen()->post_type === 'page')
+        ) {
+            $settings['tinymce'] = false;
+            $settings['quicktags'] = false;
+            $settings['media_buttons'] = false;
+        }
+
+        return $settings;
+    }
+
     public function edsdk_enqueue_editor($hook)
     {
         global $post;
@@ -99,13 +119,11 @@ class N1ED
                 $apiKey = 'N1WPDFLT';
                 update_option('n1edApiKey', $apiKey);
             }
-            $defaultUploadDir = '/uploads/2021/02';
 
             wp_localize_script('n1ed', 'n1ed_ajax_object', [
                 'apiKey' => $apiKey,
                 'token' => get_option('n1edToken'),
                 'urlFiles' => wp_upload_dir()['baseurl'],
-                'defaultUploadDir' => $defaultUploadDir,
             ]);
         }
     }
